@@ -9,24 +9,21 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL"
+name: CodeQL
 
 on:
   push:
-    branches: ["master"]
+    branches: [master, main]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: ["master"]
-  schedule:
-    - cron: "0 0 * * 1"
-
+    branches: [master, main]
 permissions:
   contents: read
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       actions: read
       contents: read
@@ -63,4 +60,4 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@662472033e021d55d94146f66f6058822b0b39fd # v3.27.0
         with:
-          category: "/language:javascript"
+          category: /language:javascript

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - main
     paths-ignore:
       - '*.md'
   pull_request:
@@ -14,14 +15,14 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: lts/*
 
       - name: Install Node.js dependencies
         run: npm install --ignore-scripts --include=dev
@@ -31,7 +32,7 @@ jobs:
 
   test:
     name: Test - Node.js ${{ matrix.node-version }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -60,7 +61,7 @@ jobs:
 
   coverage:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       checks: write
